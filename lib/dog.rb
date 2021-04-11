@@ -39,8 +39,8 @@ class Dog
       WHERE id = ?
     SQL
 
-    result = DB[:conn].execute(sql, id)[0]
-    Dog.new(result[0], result[1], result[2])
+    row = DB[:conn].execute(sql, id).flatten
+    Dog.new_from_db(row)
   end
 
   def self.create(name:, breed:)
